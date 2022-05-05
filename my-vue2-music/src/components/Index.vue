@@ -1,5 +1,6 @@
 <template>
-    <el-container>
+  <el-container>
+    <!-- 顶栏 -->
     <el-header>
       <header-bar></header-bar>
     </el-header>
@@ -25,52 +26,38 @@
               <i class="iconfont icon-gedan"></i>{{ item.name }}</el-menu-item
             >
           </el-menu-item-group>
-
-          <!-- <el-menu-item-group v-if="collectedMusicList.length != 0">
-            <template slot="title" class="groupTitle">收藏的歌单</template>
-            <el-menu-item
-              v-for="(item, index) in collectedMusicList"
-              :key="index"
-              :index="'/musiclistdetail/' + item.id"
-            >
-              <i class="iconfont icon-gedan"></i>{{ item.name }}</el-menu-item
-            >
-          </el-menu-item-group> -->
         </el-menu>
       </el-aside>
       <!-- 主体内容 -->
-      <!-- <el-main>
-        给router-view添加key有可能对性能有一定的损耗，
-        但是可以解决push同一个地址不同参数时不会重新渲染router-view的问题 
-        <router-view class="routerView" :key="$route.fullPath"></router-view>
-        用于下载的a标签
-        <a
-          :href="downloadMusicInfo.url"
-          :download="downloadMusicInfo.name"
-          target="_blank"
-          id="downloadCurrentMusic"
-        ></a>
-      </el-main> -->
+      <el-main>
+        <router-view>
+
+        </router-view>
+      </el-main>
     </el-container>
     <bottom-control></bottom-control>
-    <music-detail-card class="musicDetailCard"></music-detail-card>
+    <!-- <music-detail-card class="musicDetailCard"></music-detail-card> -->
   </el-container>
 </template>
 
 <script>
-import HeaderBar from './headerBar/HeaderBar.vue'
+import HeaderBar from "./headerBar/HeaderBar";
+import BottomControl from "./BottomControl";
+import MusicDetailCard from "../views/musicDetailCard/MusicDetailCard.vue"
 export default {
-  name: 'Index',
-  components:{
+  name: "Index",
+  components: {
     HeaderBar,
+    BottomControl,
+    MusicDetailCard
   },
   data() {
     return {
-      defaultActive:"",
-      createdMusicList:"", //创建的歌单
-    }
+      defaultActive: "",
+      createdMusicList: "", //创建的歌单
+    };
   },
-}
+};
 </script>
 
 <style>

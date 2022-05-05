@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-// import './plugins/element'
+
 // 引入 element-ui
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
