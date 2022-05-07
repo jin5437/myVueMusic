@@ -36,7 +36,7 @@
       </el-main>
     </el-container>
     <bottom-control></bottom-control>
-    <!-- <music-detail-card class="musicDetailCard"></music-detail-card> -->
+    <music-detail-card class="musicDetailCard"></music-detail-card>
   </el-container>
 </template>
 
