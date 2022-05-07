@@ -81,7 +81,7 @@ export default {
 
 .el-header {
   background-color: #ec4141;
-  height: 50px !important;
+  /* height: 50px !important; */
   padding: 0;
   margin: 0;
   z-index: 100;
