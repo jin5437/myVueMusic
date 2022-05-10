@@ -25,11 +25,11 @@
         </el-popover>
       </div>
     </div>
-    <!-- <div class="right">
+    <div class="right">
       <div class="avatar">
         <img src="../../assets/img/test.jpg" alt="" />
       </div>  
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -59,7 +59,6 @@ export default {
 .headerBar {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   width: 100%;
   height: 50px;
   position: relative;
@@ -71,7 +70,7 @@ export default {
   justify-content: center;
 }
 .left {
-  width: 110px;
+  width: 100px;
   margin: 0 50px 0 10px;
 }
 
@@ -79,10 +78,10 @@ export default {
   width: 100%;
 }
 
-/* .center {
+.center {
   display: flex;
   align-items: center;
-} */
+}
 
 .buttons {
   color: rgb(235, 235, 235);
@@ -101,20 +100,20 @@ export default {
   margin: 0 3px;
 }
 
-/* .right {
+.right {
   display: flex;
   position: absolute;
   right: 50px;
-  top: 0;
+  top: 10px;
   line-height: 50px;
-} */
+}
 
 .user {
   display: flex;
   align-items: center;
 }
 
-/* .avatar {
+.avatar {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -127,7 +126,7 @@ export default {
 .avatar img {
   width: 100%;
   display: block;
-} */
+}
 
 .userName {
   font-size: 12px;
