@@ -13,8 +13,20 @@
           :default-active="defaultActive"
         >
           <el-menu-item index="/discover">
-            <i class="iconfont icon-yinle"></i>
+            <i class="iconfont el-icon-headset"></i>
             <span slot="title">发现音乐</span>
+          </el-menu-item>
+          <el-menu-item index="/video">
+            <i class="iconfont el-icon-video-camera"></i>
+            <span slot="title">发现视频</span>
+          </el-menu-item>
+          <el-menu-item index="/favorites">
+            <i class="iconfont el-icon-star-on"></i>
+            <span slot="title">收藏喜欢</span>
+          </el-menu-item>
+          <el-menu-item index="/recommends">
+            <i class="iconfont el-icon-medal"></i>
+            <span slot="title">每日推荐</span>
           </el-menu-item>
           <el-menu-item-group v-if="createdMusicList.length != 0">
             <template slot="title" class="groupTitle">创建的歌单</template>
@@ -60,15 +72,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .is-active {
   background-color: #f6f6f7;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .iconfont {
-  font-size: 14px;
+  font-size: 16px;
   margin: 5px !important;
 }
 
@@ -101,11 +113,11 @@ export default {
 }
 
 .el-menu-item {
-  font-size: 12px;
+  font-size: 16px;
   padding: 0 0 0 10px !important;
   margin: 5px 0 !important;
-  height: 30px;
-  line-height: 30px;
+  height: 50px;
+  line-height: 50px;
 }
 
 .el-menu-item-group {
