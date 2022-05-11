@@ -12,7 +12,26 @@ const routes = [
   }, 
   {
     path: '/index',
-    component: Index
+    redirect:'/discover',
+    component: Index,
+    children:[
+      {
+        path:'/discover',
+        component:'Discover'
+      },
+      {
+        path:'/video',
+        component:'Video'
+      },
+      {
+        path:'/favorites',
+        component:'Favorites'
+      },
+      {
+        path:'/recommendmusic',
+        component:'/RecommendMusic'
+      }
+    ]
   }
 ]
 

@@ -42,9 +42,7 @@
       </el-aside>
       <!-- 主体内容 -->
       <el-main>
-        <router-view>
-
-        </router-view>
+        <router-view></router-view>
       </el-main>
     </el-container>
     <bottom-control></bottom-control>
