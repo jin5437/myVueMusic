@@ -2,6 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 const Index = () => import('../components/Index.vue')
+const Discover = () => import('../views/discover/Discover.vue')
+const Video = () => import('../views/video/Video.vue')
+const Favorites = () => import('../views/favorites/Favorites.vue')
+const RecommendMusic = () => import('../views/recommendMusic/RecommendMusic.vue')
 
 Vue.use(VueRouter)
 
@@ -12,24 +16,24 @@ const routes = [
   }, 
   {
     path: '/index',
-    redirect:'/discover',
+    // redirect:'/discover',
     component: Index,
     children:[
       {
         path:'/discover',
-        component:'Discover'
+        component:Discover
       },
       {
         path:'/video',
-        component:'Video'
+        component:Video
       },
       {
         path:'/favorites',
-        component:'Favorites'
+        component:Favorites
       },
       {
         path:'/recommendmusic',
-        component:'/RecommendMusic'
+        component:RecommendMusic
       }
     ]
   }
