@@ -99,7 +99,7 @@ export default {
 
 .el-aside {
   border-right: 1px solid #ccc;
-  height: calc(80vh - 105px);
+  height: calc(90vh);
 }
 
 .el-menu {
