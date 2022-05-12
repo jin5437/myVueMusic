@@ -5,10 +5,10 @@ module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
   devServer: {
-    // open:false,       // 是否启动时自动打开浏览器并访问
-    // host:'127.0.0.1', // 自动访问的主机号
-    // port:8080,        // 前端端口
-    // https:false,
+    open:true,           // 是否启动时自动打开浏览器并访问
+    host:'127.0.0.1',    // 自动访问的主机号
+    port:8080,           // 前端端口
+    https:false,
 
     proxy: {
 

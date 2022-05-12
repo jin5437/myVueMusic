@@ -6,7 +6,9 @@ const Discover = () => import('../views/discover/Discover.vue')
 const Video = () => import('../views/video/Video.vue')
 const Favorites = () => import('../views/favorites/Favorites.vue')
 const RecommendMusic = () => import('../views/recommendMusic/RecommendMusic.vue')
-
+const MusicList = () => import('../views/discover/discoverChildren/MusicList.vue')
+const Ranking = () => import('../views/discover/discoverChildren/Ranking.vue')
+const Singer = () => import('../views/discover/discoverChildren/Singer.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,7 +23,21 @@ const routes = [
     children:[
       {
         path:'/discover',
-        component:Discover
+        component:Discover,
+        children:[
+          {
+            path:'/discover/musiclist',
+            component:MusicList
+          },
+          {
+            path:'/discover/rangking',
+            component:Ranking
+          },
+          {
+            path:'/discover/singer',
+            component:Singer
+          }
+        ]
       },
       {
         path:'/video',

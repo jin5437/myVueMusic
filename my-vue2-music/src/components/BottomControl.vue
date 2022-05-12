@@ -16,14 +16,11 @@
     @timeupdate="timeupdate"
     ></audio>
     <div class="left">
-      <div class="avatar">
-        <img
-          :src="musicDetail.al.picUrl"
-          alt=""
-          v-if="musicDetail.al"
-          :draggable="false"
-        />
-        <img src="../assets/img/test.jpg" alt="" v-else :draggable="false" />
+      <div class="avatar" @click="$store.commit('changeMusicDetailCardState')">
+        <!-- Todo ：播放音乐时，切换到专辑封面 -->
+        <!-- <img  alt="专辑封面"  
+        /> -->
+        <img src="../assets/img/test.jpg" alt="" />
       </div>
       <div class="musicInfo">
         <!-- 展示歌曲名称 -->
@@ -47,16 +44,21 @@
       <div class="buttons">
         <span 
           ><i class="iconfont el-icon-refresh-right" ></i
-          ><i class="iconfont icon-suiji1" ></i
-        ></span>
+          >
+          <!-- Todo：随机播放 -->
+          <!-- <i class="iconfont icon-suiji1" ></i> -->
+        </span>
         <span 
           ><i class="iconfont el-icon-arrow-left"></i
         ></span>
-        <span >
+        <!-- <span @click="musicList.length !=0 ? changePlayState() :''"> -->
+          <span @click="changePlayState()">
           <i
             class="iconfont el-icon-video-play"
+            v-show="!$store.state.isPlay"
+
           ></i>
-          <i class="iconfont el-icon-video-pause" ></i>
+          <i class="iconfont el-icon-video-pause" v-show="$store.state.isPlay"></i>
         </span>
         <span 
           ><i class="iconfont el-icon-arrow-right"></i
@@ -104,10 +106,14 @@ export default {
       musicDetail:{},
       // 播放类型：顺序播放order、随机播放random
       playType:"order",
-
+      musicList:[]
     }
   },
   methods: {
+    // 切换播放状态
+    changePlayState(){
+      this.$store.commit('changeState')
+    },
     timeupdate(){
 
     }

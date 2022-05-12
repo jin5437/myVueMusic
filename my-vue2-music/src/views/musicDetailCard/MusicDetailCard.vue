@@ -1,6 +1,6 @@
 <template>
-  <div class="musicDetailCard">
-    <div class="closeCard">
+  <div class="musicDetailCard" v-show="$store.state.isMusicDetailCardShow">
+    <div class="closeCard" @click="$store.commit('changeMusicDetailCardState')">
       <i class="iconfont el-icon-arrow-down"></i>
     </div>
     <div class="musicDetailCardContainer">
@@ -49,7 +49,7 @@
               
             </div>
           </div>
-          <lyrics-scroll :lyric="lyric"></lyrics-scroll>
+          <!-- <lyrics-scroll :lyric="lyric"></lyrics-scroll> -->
         </div>
       </div>
       <div
@@ -57,40 +57,25 @@
         
         element-loading-background="rgba(255, 255, 255, 0.1)"
       >
-        <comment
-          :comments="hotComments"
-          :commentType="'music'"
-          :commentId="$store.state.musicId + ''"
-          :musicTitle="musicInfo.name"
-          @getComment="getMusicComment($store.state.musicId)"
-          class="commentComponent"
-          v-if="currentCommentPage == 1"
+        <!-- <comment
+          
           ><div slot="title">热门评论</div></comment
         >
         <comment
-          :comments="comment.comments"
-          :commentType="'music'"
-          :commentId="$store.state.musicId + ''"
-          :musicTitle="musicInfo.name"
-          @getComment="getMusicComment($store.state.musicId)"
+          
           class="commentComponent"
-          ><div slot="title">最新评论({{ comment.total }})</div></comment
-        >
+          ><div slot="title">最新评论</div></comment
+        > -->
         <!-- 评论分页 -->
-        <div class="page" v-show="comment.comments && comment.comments[0]">
+        <div class="page" >
           <el-pagination
             background
-            layout="prev, pager, next"
-            :total="comment.total"
-            small
-            :page-size="20"
-            :current-page="currentCommentPage"
-            @current-change="commentPageChange"
+            
           >
           </el-pagination>
         </div>
       </div>
-      <go-top scrollObj=".musicDetailCardContainer"></go-top>
+      <!-- <go-top scrollObj=".musicDetailCardContainer"></go-top> -->
     </div>
     <div>暂无播放音乐</div>
   </div>
@@ -126,8 +111,7 @@ export default {
 .musicDetailCard {
   position: fixed;
   width: 100%;
-  // height: calc(100vh - 55px);
-  height: calc(80vh - 55px);
+  height: calc(100vh - 55px);
   bottom: 55px;
   left: 0;
   z-index: 1000;
@@ -137,11 +121,13 @@ export default {
 }
 
 .closeCard .iconfont {
+  cursor: pointer;
   position: absolute;
   top: 15px;
   left: 35px;
   font-size: 21px !important;
 }
+
 
 .musicDetailCardContainer {
   height: 100%;

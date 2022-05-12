@@ -5,14 +5,15 @@
     </div>
     <div class="center">
       <div class="search">
-        <el-popover
+        <!-- <el-popover
           placement="bottom"
           width="300"
           v-model="isSearchPopShow"
           popper-class="searchPop"
           trigger="focus"
         >
-          <el-input
+        </el-popover> -->
+        <el-input
             placeholder="请输入内容"
             prefix-icon="el-icon-search"
             size="mini"
@@ -22,7 +23,6 @@
             v-model="searchInput"
           >
           </el-input>
-        </el-popover>
       </div>
     </div>
     <div class="right">
