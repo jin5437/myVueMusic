@@ -31,7 +31,7 @@ export default {
   methods: {
     // 接收子组件navbar传过来的点击事件，为什么要接收呢？
     clickBarItem(path){
-      
+      this.$router.push(path)
     }
   },
 };
