@@ -112,19 +112,19 @@
             </el-table-column>
             <!-- <el-table-column prop="id"></el-table-column> -->
           </el-table>
-          <div class="loadMore" v-if="isMore && !this.$store.state.isLogin">
+          <!-- <div class="loadMore" v-if="isMore && !this.$store.state.isLogin">
             登陆后查看更多音乐
           </div>
-          <div class="placeholder" v-else></div>
+          <div class="placeholder" v-else></div> -->
           <!-- <div class="placeholder"></div> -->
         </el-tab-pane>
-        <el-tab-pane label="评论" name="second">
+        <!-- <el-tab-pane label="评论" name="second">
           <div
             class="commentList"
             v-if="comments.comments"
             v-loading="isCommentLoading"
           >
-            <!-- 精彩评论 -->
+            精彩评论
             <comment
               :commentType="'musicList'"
               :comments="comments.hotComments"
@@ -135,7 +135,7 @@
               ref="hotComments"
               ><div slot="title">精彩评论</div></comment
             >
-            <!-- 最新评论 -->
+            最新评论
             <comment
               :comments="comments.comments"
               :commentType="'musicList'"
@@ -150,7 +150,7 @@
               ><div slot="title">热门评论</div></comment
             >
           </div>
-          <!-- 分页 -->
+          分页
           <div
             class="page"
             v-show="comments.comments && comments.comments.length != 0"
@@ -166,17 +166,8 @@
             >
             </el-pagination>
           </div>
-        </el-tab-pane>
-        <el-tab-pane label="收藏者" name="third">
-          <user-list-card
-            
-          ></user-list-card>
-          <div
-            class="tips"
-          >
-            暂无收藏者
-          </div>
-        </el-tab-pane>
+        </el-tab-pane> -->
+        
       </el-tabs>
     </div>
 
@@ -187,7 +178,12 @@
 
 <script>
 export default {
-  name:'MusicListDetail'
+  name:'MusicListDetail',
+  data(){
+    return{
+
+    }
+  }
 }
 </script>
 
