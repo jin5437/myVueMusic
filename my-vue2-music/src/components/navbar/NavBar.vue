@@ -23,8 +23,13 @@ export default {
     }
   },
   props:{
+    // 这里为什么写成对象的形式，内容是什么？，为什么这样写？
+    // props验证：类型是数组，默认是空数组
     navBarItem: {
-      
+      type:Array,
+      default(){
+        return []
+      }
     }
   },
   methods: {

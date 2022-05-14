@@ -9,6 +9,7 @@ const RecommendMusic = () => import('../views/recommendMusic/RecommendMusic.vue'
 const MusicList = () => import('../views/discover/discoverChildren/MusicList.vue')
 const Ranking = () => import('../views/discover/discoverChildren/Ranking.vue')
 const Singer = () => import('../views/discover/discoverChildren/Singer.vue')
+const MusicListDetail = () => import('../views/musiclistdetail/MusicListDetail.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -50,6 +51,11 @@ const routes = [
       {
         path:'/recommendmusic',
         component:RecommendMusic
+      },
+      {
+        path:'/musiclistdetail',
+        name: 'musicListDetail',
+        component:MusicListDetail
       }
     ]
   }

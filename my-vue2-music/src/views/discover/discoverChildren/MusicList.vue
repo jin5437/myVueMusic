@@ -18,20 +18,20 @@
     </div>
     <!-- 歌单列表 -->
     <div class="musicListNavBar">
-      <div class="left">
-        <sort-box
-          
-        ></sort-box>
+      <!-- <div class="left">
+        <sort-box></sort-box>
       </div>
       <div class="right">
-        <second-nav-bar
-          
-        ></second-nav-bar>
-      </div>
-      <!-- 展示歌单列表 -->
-      <list-card></list-card>
-      <!-- 分页 -->
-      <div class="page" v-if="musicList.playlists">
+        <second-nav-bar></second-nav-bar>
+      </div> -->
+    </div>
+    <!-- 展示歌单列表 -->
+    <list-card
+    @click="clickListCardItem"
+    >
+    </list-card>
+    <!-- 分页 -->
+    <div class="page" v-if="musicList.playlists">
       <el-pagination
         background
         layout="prev, pager, next"
@@ -43,29 +43,31 @@
       >
       </el-pagination>
     </div>
-    </div>
   </div>
 </template>
 
 <script>
 import ListCard from '@/components/listcard/ListCard.vue'
-import SortBox from '@/components/sortbox/SortBox.vue'
-import SecondNavBar from '@/components/secondnavbar/SecondNavBar.vue'
+// import SortBox from '@/components/sortbox/SortBox.vue'
+// import SecondNavBar from '@/components/secondnavbar/SecondNavBar.vue'
 export default {
   name:'MusicList',
   components:[
     ListCard,
-    SortBox,
-    SecondNavBar
+    // SortBox,
+    // SecondNavBar
   ],
   data(){
-    return{
-      
+    return{  
       musicList:{},
       currentPage:1,
     }
   },
   methods:{
+    // 点击歌单，进入歌单详细列表页面 MusicListDetail.vue
+    clickListCardItem(id){
+      this.$router.push({name: 'musicListDetail',params:{id}})
+    },
     // 页面发生变化
     pageChange(){
 
