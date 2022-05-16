@@ -24,6 +24,7 @@ export default new Vuex.Store({
     },
     changeState(state){
       state.isPlay = !state.isPlay
+      
     }
   },
   // 异步方法

@@ -20,7 +20,7 @@ export default {
         {
           name: "歌手",
           path: "./discover/singer",
-        },
+        }, 
         {
           name: "排行榜",
           path: "./discover/rangking",

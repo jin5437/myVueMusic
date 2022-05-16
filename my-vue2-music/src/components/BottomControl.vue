@@ -10,8 +10,7 @@
     :src="musicUrl"
     ref="audioPlayer"
     autoplay
-    @play="changeState(true)"  
-    @pause="changeState(false)"
+    
     @ended="changeMusic('next')"
     @timeupdate="timeupdate"
     ></audio>
@@ -36,7 +35,7 @@
         </div>
       </div>
       <div class="downloadContainer" >
-        <i class="iconfont icon-download" ></i>
+        <!-- <i class="iconfont icon-download" ></i> -->
       </div>
     </div>
     <!-- 中间 -->
@@ -102,7 +101,7 @@ export default {
   name: 'BottomControl',
   data() {
     return {
-      musicUrl:"",
+      musicUrl:"http://m7.music.126.net/20220515233346/5d1345694850b3964a7467583cb0648e/ymusic/8d91/131a/b854/f44ccff447573fb1a1ad3f8eed6c44e0.mp3",
       musicDetail:{},
       // 播放类型：顺序播放order、随机播放random
       playType:"order",
@@ -110,13 +109,36 @@ export default {
     }
   },
   methods: {
+    test(){
+      this.$refs['audioPlayer'].play()
+    },
     // 切换播放状态
     changePlayState(){
       this.$store.commit('changeState')
+      this.test()
     },
     timeupdate(){
 
     }
+  },
+  mounted() {
+    let url = '/api/artist/list?type=2&area=7&initial=b'
+    this.$axios.get(url).then(res => {
+      console.log(res)
+    })
+    let url2 = '/api/top/playlist/highquality'
+    this.$axios.get(url2).then(res => {
+
+    })
+    let url3 = '/api/playlist/detail?id=514947114'
+    this.$axios.get(url3).then(res=>{
+
+    })
+    let url4 = '/api/song/url?id=202369'
+    this.$axios.get(url4).then(res =>{
+      this.musicUrl = res.data.data[0].url
+      //this.test()
+    })
   },
 }
 </script>
@@ -221,18 +243,18 @@ export default {
   margin-right: 15px;
 }
 
-.icon-yinliang {
+.el-icon-headset {
   font-size: 18px;
-  margin-right: 7px;
+  margin-right: 15px;
 }
 
 .volumeSlider {
   width: 55px;
 }
 
-.icon-bofangliebiao {
+.el-icon-s-operation {
   font-size: 18px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .progressSlider {

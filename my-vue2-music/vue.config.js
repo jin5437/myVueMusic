@@ -14,7 +14,7 @@ module.exports = defineConfig({
 
       // 用 /api 来代替下面 target 中的地址
       '/api': {
-        target: 'http://www.codeman.ink:3000', // 后台地址（不要忘了写前面的http）
+        target: 'http://127.0.0.1:3000', // 后台地址（不要忘了写前面的http）
         changeOrigin: true, //允许跨域
         ws: true,
         pathRewrite: {
