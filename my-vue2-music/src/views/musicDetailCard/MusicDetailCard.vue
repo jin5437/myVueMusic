@@ -33,15 +33,19 @@
             </div>
           </div>
         </div>
+        <!-- 展示歌曲名字、歌曲信息、歌词 -->
         <div class="right">
           <div class="title">
+            <!-- 歌曲名字 -->
             <div class="musicName"></div>
+            <!-- 歌曲信息 -->
             <div
               class="album"
               
             >
               
             </div>
+            <!-- 歌手信息 -->
             <div
               class="singer"
               
@@ -49,7 +53,8 @@
               
             </div>
           </div>
-          <!-- <lyrics-scroll :lyric="lyric"></lyrics-scroll> -->
+          <!-- 滚动展示歌词 -->
+          <lyrics-scroll :lyric="lyric"></lyrics-scroll>
         </div>
       </div>
       <div
@@ -67,14 +72,14 @@
           ><div slot="title">最新评论</div></comment
         > -->
         <!-- 评论分页 -->
-        <div class="page" >
+        <!-- <div class="page" >
           <el-pagination
             background
             
           >
           </el-pagination>
-        </div>
-      </div>
+        </div>-->
+      </div> 
       <!-- <go-top scrollObj=".musicDetailCardContainer"></go-top> -->
     </div>
     <div>暂无播放音乐</div>
@@ -82,8 +87,18 @@
 </template>
 
 <script>
+import LyricsScroll from '../../components/lyricsScroll/LyricsScroll.vue'
 export default {
-  name:'MusicDetailCard'
+  name:'MusicDetailCard',
+  components:{
+    LyricsScroll
+  },
+  data() {
+    return {
+      lyric:[[0,"正在加载歌词"]],
+    }
+  },
+    
 }
 </script>
 
@@ -199,7 +214,7 @@ export default {
 
 /* 碟子设置旋转动画 */
 .discAnimation {
-  /* infinite动画无限循环 */
+  /* infinite实现动画无限循环，否则只能循环一圈就停下来 */
   animation: disc 25s linear infinite;
   /* 动画延迟一秒 */
   animation-delay: 0.8s;
@@ -207,10 +222,10 @@ export default {
 
 @keyframes disc {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg);  //旋转0度
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg);   //旋转360度
   }
 }
 

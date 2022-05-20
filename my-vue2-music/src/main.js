@@ -10,9 +10,8 @@ import router from './router'
 // 引入vuex，简写形式
 import store from './store'
 
-// 引入axios
-import axios from 'axios'
-Vue.prototype.$axios = axios
+import {request} from './network/request'
+Vue.prototype.$request = request
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
