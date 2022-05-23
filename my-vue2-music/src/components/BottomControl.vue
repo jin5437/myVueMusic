@@ -101,7 +101,7 @@ export default {
   name: 'BottomControl',
   data() {
     return {
-      musicUrl:"http://m7.music.126.net/20220515233346/5d1345694850b3964a7467583cb0648e/ymusic/8d91/131a/b854/f44ccff447573fb1a1ad3f8eed6c44e0.mp3",
+      musicUrl:"",
       musicDetail:{},
       // 播放类型：顺序播放order、随机播放random
       playType:"order",
@@ -119,13 +119,27 @@ export default {
     },
     timeupdate(){
 
+    },
+    // 获取歌曲url
+    async getMusicUrl(id){
+      let result = await this.$request("/song/url",{id})
+      if(result.data.data[0].url == null){
+        this.$message.error('当前歌曲无版权，即将为您播放下一首')
+      }
+      console.log(result)
+      this.musicUrl = result.data.data[0].url
+    },
+    // 获取精品歌单
+    getHighQualityList(){
+      let result = this.$request("/top/playlist/highquality")
+      console.log(result)
     }
   },
   mounted() {
-    let url = '/api/artist/list?type=2&area=7&initial=b'
-    this.$axios.get(url).then(res => {
-      console.log(res)
-    })
+    // let url = '/api/artist/list?type=2&area=7&initial=b'
+    // this.$axios.get(url).then(res => {
+    //   console.log(res)
+    // })
     let url2 = '/api/top/playlist/highquality'
     this.$axios.get(url2).then(res => {
 
@@ -136,6 +150,7 @@ export default {
     })
     let url4 = '/api/song/url?id=202369'
     this.$axios.get(url4).then(res =>{
+      // console.log(res)
       this.musicUrl = res.data.data[0].url
       //this.test()
     })
@@ -224,7 +239,7 @@ export default {
   font-size: 25px;
 }
 
-.center .icon-xunhuan {
+.center .el-icon-refresh-right {
   font-size: 17px;
 }
 .center .icon-xihuan {
@@ -268,7 +283,7 @@ export default {
   text-align: center;
 }
 
-.icon-zantingtingzhi {
+.el-icon-video-pause {
   font-size: 35px !important;
 }
 

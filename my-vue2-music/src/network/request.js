@@ -1,5 +1,6 @@
 // 引入axios
 import axios from 'axios'
+import Vue from 'vue'
 Vue.prototype.$axios = axios
 
 // export function 在里面可以导出多个，如果用export default 只能导出一个
