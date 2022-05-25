@@ -4,7 +4,12 @@
     <div class="listInfo">
       <!-- 歌单封面 -->
       <div class="listAvatar">
-        <img alt="歌单封面" />
+        <img         
+          :src="theFirstOfHighquality.coverImgUrl" 
+          alt="歌单封面" 
+          class="backgroundImg"
+        />
+        
       </div>
       <div class="right">
         <!-- 标题 -->
@@ -181,9 +186,21 @@ export default {
   name:'MusicListDetail',
   data(){
     return{
-
+      theFirstOfHighquality:{},
     }
-  }
+  },
+  methods: {
+    // 获取精品歌单的第一条数据
+    async getTheFirstOfHighquality(){
+      // limit: 取出歌单数量 , 默认为 20
+      let result = await this.$request("/top/playlist/highquality",{
+        limit:1,
+      })
+      console.log(result)
+      this.theFirstOfHighquality = result.data.playlist
+      console.log(this.theFirstOfHighquality)
+    },
+  },
 }
 </script>
 

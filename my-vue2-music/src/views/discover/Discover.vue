@@ -14,7 +14,7 @@ export default {
     return {
       navBarData: [
         {
-          name: "歌单",
+          name: "精品歌单",
           path: "./discover/musiclist",
         },
         {

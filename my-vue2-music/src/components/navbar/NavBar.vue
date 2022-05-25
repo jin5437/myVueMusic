@@ -68,14 +68,14 @@ export default {
 }
 
 .barItem {
-  font-size: 13px;
+  font-size: 16px;
   margin: 0 10px;
   text-align: center;
   cursor: pointer;
 }
 
 .active {
-  font-size: 16px;
+  font-size: 18px;
   color: black;
   font-weight: 600;
   padding-bottom: 5px;

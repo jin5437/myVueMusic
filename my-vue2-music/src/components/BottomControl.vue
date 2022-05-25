@@ -129,11 +129,7 @@ export default {
       console.log(result)
       this.musicUrl = result.data.data[0].url
     },
-    // 获取精品歌单
-    getHighQualityList(){
-      let result = this.$request("/top/playlist/highquality")
-      console.log(result)
-    }
+    
   },
   mounted() {
     // let url = '/api/artist/list?type=2&area=7&initial=b'
@@ -142,11 +138,13 @@ export default {
     // })
     let url2 = '/api/top/playlist/highquality'
     this.$axios.get(url2).then(res => {
-
+      // console.log(res)
+      // console.log(res.data.playlists[0])
     })
     let url3 = '/api/playlist/detail?id=514947114'
     this.$axios.get(url3).then(res=>{
-
+      // console.log(res)
+      // console.log(res.data.playlist)
     })
     let url4 = '/api/song/url?id=202369'
     this.$axios.get(url4).then(res =>{

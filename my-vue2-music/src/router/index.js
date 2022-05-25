@@ -19,23 +19,24 @@ const routes = [
   }, 
   {
     path: '/index',
-    // redirect:'/discover',
+    redirect:'/index/discover',
     component: Index,
     children:[
       {
-        path:'/discover',
+        path:'/index/discover',
+        redirect:'/index/discover/musiclist',
         component:Discover,
         children:[
           {
-            path:'/discover/musiclist',
+            path:'/index/discover/musiclist',
             component:MusicList
           },
           {
-            path:'/discover/rangking',
+            path:'/index/discover/rangking',
             component:Ranking
           },
           {
-            path:'/discover/singer',
+            path:'/index/discover/singer',
             component:Singer
           }
         ]

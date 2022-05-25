@@ -1,16 +1,24 @@
 <template>
-  <div class="listCard">
+  <div 
+    class="listCard"
+    v-infinite-scroll="load"
+    :infinite-scroll-disabled="disabled"
+    :infinite-scroll-distance="300"
+    :infintite-scroll-immediate="false"
+    ref="listCard"
+  >
     <div
       class="listCardItem"
-      
+      v-for="(item,index) in listCardData" :key="index"
+      @click="clickListCardItem(item.id)"
     >
       <div class="image">
         <img
-          
+          :src="(item.picUrl || item.coverImgUrl) + '?param=400y400'"
           alt="歌单封面"
         />
       </div>
-      <div class="title"></div>
+      <div class="title">{{ item.name }}</div>
     </div>
   </div>
 </template>
@@ -18,6 +26,50 @@
 <script>
 export default {
   name:'ListCard',
+  data() {
+    return {
+      disabled:true,  //是否可以触发load方法，true表示不能触发
+    }
+  },
+  props:{
+    listCardData:{
+      type: Array,
+      default(){
+        return []
+      },
+    },
+    // 是否使用上拉触底事件
+    isLoad:{
+      type:Boolean,
+      default(){
+        return false
+      }
+    }
+  },
+  methods: {
+    // 无限滚动加载数据，上拉触底触发该方法
+    load(){
+      console.log("滚动到底部")
+      this.$emit("bottomLoad")
+      // 触发后加载数据，期间不允许再次触发load事件
+      this.disabled = true
+    },
+    clickListCardItem(id){
+      thid.$emit("clickListCardItem",id)
+    },
+  },
+  watch: {
+    // 数据更新之后，再次运行触发事件
+    listCardData(){
+      if(this.isLoad == true){
+        if(this.listCardData.length !== 0){
+          this.disabled = false 
+        }else{
+          this.disabled = true
+        }
+      }
+    }
+  }
 }
 </script>
 
@@ -25,12 +77,15 @@ export default {
 .listCard {
   display: flex;
   flex-wrap: wrap;
-  margin: 10px 0;
+  /* justify-content: space-between; */
+  /* margin: 10px 0; */
 }
 
 .listCardItem {
-  width: 18.4%;
-  margin: 0 2% 20px 0;
+  box-sizing: border-box;
+  width: 20%;
+  padding: 20px;
+  /* margin: 0 2% 20px 0; */
   overflow: hidden;
   cursor: pointer;
 }
