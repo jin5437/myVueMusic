@@ -31,7 +31,7 @@
     <!-- 展示歌单列表 -->
     <list-card
       :listCardData = "musicList.playlists"
-      @click="clickListCardItem"
+      @clickListCardItem="clickListCardItem"
     >
     </list-card>
     <!-- 分页 -->
@@ -73,9 +73,9 @@ export default {
       let result = await this.$request("/top/playlist/highquality",{
         limit:1,
       })
-      console.log(result)
+      // console.log(result)
       this.theFirstOfHighquality = result.data.playlists[0]
-      console.log(this.theFirstOfHighquality)
+      // console.log(this.theFirstOfHighquality)
     },
 
     // todo---获取热门歌单的tag数据，拿tag用来做什么呢？
@@ -92,12 +92,13 @@ export default {
       let result = await this.$request("/top/playlist",{
         cat:this.currentTag.name,
       })
-      console.log(result)
+      // console.log(result)
       this.musicList = result.data
     },
     // 点击歌单，id是歌单id，进入歌单详细列表页面 MusicListDetail.vue
     clickListCardItem(id){
       this.$router.push({name: 'musicListDetail',params:{id}})
+      console.log("进入歌单详细列表页面 MusicListDetail.vue")
     },
     // 页面发生变化
     pageChange(){

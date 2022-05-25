@@ -55,7 +55,7 @@ export default {
       this.disabled = true
     },
     clickListCardItem(id){
-      thid.$emit("clickListCardItem",id)
+      this.$emit("clickListCardItem",id)
     },
   },
   watch: {

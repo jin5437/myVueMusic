@@ -201,6 +201,10 @@ export default {
       console.log(this.theFirstOfHighquality)
     },
   },
+  mounted() {
+    
+    this.id = this.$route.params.id
+  },
 }
 </script>
 
