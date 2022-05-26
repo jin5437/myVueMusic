@@ -5,20 +5,18 @@
       <!-- 歌单封面 -->
       <div class="listAvatar">
         <img         
-          :src="theFirstOfHighquality.coverImgUrl" 
+          :src="musicListDetail.coverImgUrl" 
           alt="歌单封面" 
-          class="backgroundImg"
         />
-        
       </div>
       <div class="right">
         <!-- 标题 -->
         <div class="title">
           <div class="titleTag">歌单</div>
-          <div class="titleContent"></div>
+          <div class="titleContent">{{musicListDetail.name}}</div>
         </div>
         <!-- 用户信息 -->
-        <div class="user">
+        <!-- <div class="user">
           <div class="userAvatar">
             <img alt="用户信息" />
           </div>
@@ -30,16 +28,16 @@
           <div class="createTime">
             创建
           </div>
-        </div>
+        </div> -->
         <!-- 操作按钮 -->
         <div class="buttons">
-          <div class="buttonItem playAll" >
+          <div class="buttonItem playAll" @click="playAll">
             <i class="iconfont el-icon-caret-right playAll"></i>
             <span>播放全部</span>
           </div>
           <div class="buttonItem">
             <i class="iconfont el-icon-star-on"></i>
-            <span></span>
+            <span>收藏</span>
           </div>
           <div class="buttonItem">
             <i class="iconfont el-icon-share"></i>
@@ -51,24 +49,25 @@
           标签：
           <div
             class="tagItem"
-            
+            v-for="(item,key) in musicListDetail.tags"
+            :key="key"
           >
             {{ item }}
           </div>
-          <div>暂无标签</div>
+          <!-- <div v-if="musicListDetail.tags.length == 0">暂无标签</div> -->
         </div>
         <!-- 歌曲列表的歌曲数量和播放量 -->
         <div class="otherInfo">
           <div class="musicNum">
-            歌曲 : 
+            歌曲 : {{musicListDetail.trackCount | handleNum}}
           </div>
           <div class="playCount">
-            播放 : 
+            播放 : {{musicListDetail.playCount | handleNum}}
           </div>
         </div>
         <div class="desc">
           简介 :
-          
+          {{musicListDetail.description ? musicListDetail.description : "暂无简介"}}
         </div>
       </div>
     </div>
@@ -105,7 +104,7 @@
             </el-table-column>
             <el-table-column label="" width="23">
               <!-- 下载按钮 -->
-              <!-- <i class="iconfont icon-download"></i> -->
+              <i class="iconfont icon-download"></i>
             </el-table-column>
             <el-table-column prop="name" label="音乐标题" min-width="350">
             </el-table-column>
@@ -182,12 +181,14 @@
 </template>
 
 <script>
+import {formatDate, handleNum,  handleMusicTime} from "../../plugins/utils"
 export default {
   name:'MusicListDetail',
   data(){
     return{
-      musicListDetail:null,
+      musicListDetail:{},
       theFirstOfHighquality:{},
+      scrollLoadDisabled:false
     }
   },
   methods: {
@@ -196,12 +197,37 @@ export default {
       // 时间戳
       let timestamp = Date.parse(new Date()) 
       let result = await this.$request("/playlist/detail",{
-        id: this.$route.params.id
+        id: this.$route.params.id,
+        timestamp
       })
       console.log(result)
       this.musicListDetail = result.data.playlist
+    },
+
+    // 播放全部
+    playAll(){
+
+    },
+    clickTab(){
+
+    },
+    clickRow(row){
+      console.log(row)
+    },
+    // 判断点击的是否是下载按钮  ---- Todo
+    clickCell(){
+
+    },
+    // 为什么要设置这个函数？功能是什么？
+    handleIndex(){
+
     }
-    
+  },
+  watch:{
+    // 过滤器，控制列表展示的歌曲数量
+    filters:{
+      handleNum
+    }
   },
   mounted() {
     // 这里暂不考虑异步的问题

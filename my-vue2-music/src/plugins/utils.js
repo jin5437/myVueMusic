@@ -36,6 +36,7 @@ function padLeftZero(str) {
 // 处理大于1w的数字
 export function handleNum(num) {
     if (num > 10000) {
+        // 保留 n 位小数，返回值是一个字符串
         num = (num / 10000).toFixed(1)
         return num + '万';
     } else {
