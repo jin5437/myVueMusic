@@ -136,22 +136,22 @@ export default {
     // this.$axios.get(url).then(res => {
     //   console.log(res)
     // })
-    let url2 = '/api/top/playlist/highquality'
-    this.$axios.get(url2).then(res => {
-      // console.log(res)
-      // console.log(res.data.playlists[0])
-    })
-    let url3 = '/api/playlist/detail?id=514947114'
-    this.$axios.get(url3).then(res=>{
-      // console.log(res)
-      // console.log(res.data.playlist)
-    })
-    let url4 = '/api/song/url?id=202369'
-    this.$axios.get(url4).then(res =>{
-      // console.log(res)
-      this.musicUrl = res.data.data[0].url
-      //this.test()
-    })
+    // let url2 = '/api/top/playlist/highquality'
+    // this.$axios.get(url2).then(res => {
+    //   console.log(res)
+    //   console.log(res.data.playlists[0])
+    // })
+    // let url3 = '/api/playlist/detail?id=514947114'
+    // this.$axios.get(url3).then(res=>{
+    //   console.log(res)
+    //   console.log(res.data.playlist)
+    // })
+    // let url4 = '/api/song/url?id=202369'
+    // this.$axios.get(url4).then(res =>{
+    //   console.log(res)
+    //   this.musicUrl = res.data.data[0].url
+    //   this.test()
+    // })
   },
 }
 </script>

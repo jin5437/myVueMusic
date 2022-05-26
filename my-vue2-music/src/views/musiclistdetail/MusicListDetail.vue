@@ -186,24 +186,31 @@ export default {
   name:'MusicListDetail',
   data(){
     return{
+      musicListDetail:null,
       theFirstOfHighquality:{},
     }
   },
   methods: {
-    // 获取精品歌单的第一条数据
-    async getTheFirstOfHighquality(){
-      // limit: 取出歌单数量 , 默认为 20
-      let result = await this.$request("/top/playlist/highquality",{
-        limit:1,
+    // 根据传过来的id查询歌单详情
+    async getMusicListDetail(){
+      // 时间戳
+      let timestamp = Date.parse(new Date()) 
+      let result = await this.$request("/playlist/detail",{
+        id: this.$route.params.id
       })
       console.log(result)
-      this.theFirstOfHighquality = result.data.playlist
-      console.log(this.theFirstOfHighquality)
-    },
+      this.musicListDetail = result.data.playlist
+    }
+    
   },
   mounted() {
+    // 这里暂不考虑异步的问题
+    // this.getMusicListDetail()
     
-    this.id = this.$route.params.id
+    // let test = "/api/playlist/detail?id=924680166&timestamp=1653552747000"
+    // this.$axios.get(test).then(res =>{
+    //   console.log(res)
+    // })
   },
 }
 </script>
