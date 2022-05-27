@@ -1,5 +1,5 @@
 <template>
-  <div class="musicListDetail">
+  <div class="musicListDetail" v-if="musicListDetail">
     <!-- 歌单信息 -->
     <div class="listInfo">
       <!-- 歌单封面 -->
@@ -16,19 +16,23 @@
           <div class="titleContent">{{musicListDetail.name}}</div>
         </div>
         <!-- 用户信息 -->
-        <!-- <div class="user">
+        <div class="user">
           <div class="userAvatar">
-            <img alt="用户信息" />
+            <img 
+              :src="musicListDetail.creator.avatarUrl ? musicListDetail.creator.avatarUrl : ''"
+              alt="用户头像" />
           </div>
+          <!-- Todo：  点击用户昵称，跳转到用户界面 -->
           <div
             class="userName"
           >
-            
+            {{musicListDetail.creator.nickname}}
           </div>
           <div class="createTime">
+            {{ musicListDetail.createTime | showDate }}
             创建
           </div>
-        </div> -->
+        </div>
         <!-- 操作按钮 -->
         <div class="buttons">
           <div class="buttonItem playAll" @click="playAll">
@@ -59,10 +63,10 @@
         <!-- 歌曲列表的歌曲数量和播放量 -->
         <div class="otherInfo">
           <div class="musicNum">
-            歌曲 : {{musicListDetail.trackCount | handleNum}}
+            歌曲数量 : {{musicListDetail.trackCount | handleNum}}
           </div>
           <div class="playCount">
-            播放 : {{musicListDetail.playCount | handleNum}}
+            播放量 : {{musicListDetail.playCount | handleNum}}
           </div>
         </div>
         <div class="desc">
@@ -122,56 +126,10 @@
           <div class="placeholder" v-else></div> -->
           <!-- <div class="placeholder"></div> -->
         </el-tab-pane>
-        <!-- <el-tab-pane label="评论" name="second">
-          <div
-            class="commentList"
-            v-if="comments.comments"
-            v-loading="isCommentLoading"
-          >
-            精彩评论
-            <comment
-              :commentType="'musicList'"
-              :comments="comments.hotComments"
-              :commentId="musicListDetail.id + ''"
-              @getComment="getMusicListComment"
-              @scrollToComment="scrollToComment"
-              v-if="comments.hotComments"
-              ref="hotComments"
-              ><div slot="title">精彩评论</div></comment
-            >
-            最新评论
-            <comment
-              :comments="comments.comments"
-              :commentType="'musicList'"
-              :commentId="musicListDetail.id + ''"
-              :isHotComment="comments.hotComments ? false : true"
-              @getComment="getMusicListComment"
-              @scrollToComment="scrollToComment"
-              @transToHotComment="
-                (info) =>
-                  $refs.hotComments.floorComment(info.commentId, info.nickName)
-              "
-              ><div slot="title">热门评论</div></comment
-            >
-          </div>
-          分页
-          <div
-            class="page"
-            v-show="comments.comments && comments.comments.length != 0"
-          >
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              :total="comments.total"
-              small
-              :page-size="50"
-              :current-page="currentCommentPage"
-              @current-change="commentPageChange"
-            >
-            </el-pagination>
-          </div>
-        </el-tab-pane> -->
-        
+        <el-tab-pane label="评论" name="second">
+        </el-tab-pane>
+        <el-tab-pane label="收藏" name="third">
+        </el-tab-pane>
       </el-tabs>
     </div>
 
@@ -186,9 +144,8 @@ export default {
   name:'MusicListDetail',
   data(){
     return{
-      musicListDetail:{},
-      theFirstOfHighquality:{},
-      scrollLoadDisabled:false
+      musicListDetail:null,
+      scrollLoadDisabled:false,
     }
   },
   methods: {
@@ -198,42 +155,66 @@ export default {
       let timestamp = Date.parse(new Date()) 
       let result = await this.$request("/playlist/detail",{
         id: this.$route.params.id,
-        timestamp
+        timestamp,
       })
       console.log(result)
       this.musicListDetail = result.data.playlist
     },
 
-    // 播放全部
+    // 点击全部播放的按钮
     playAll(){
-
+      this.$store.commit("updateMusicId",this.musicListDetail.tracks[0].id)
+      this.$store.commit("updateMusicList", {
+        musicList: this.musicListDetail.tracks,
+        musicListId: this.musicListDetail.id
+      })
     },
-    clickTab(){
-
+    // 点击切换el-tab-pane
+    clickTab(e){
+      console.log(e.index)
     },
+    // 双击table的某一行，播放歌曲
     clickRow(row){
+      // row是当前行的数据
       console.log(row)
+      // 将musicId提交到Vuex中，供bottomControl查询歌曲url和其他操作
+      this.$store.commit("updateMusicId",row.id)
+      // 如果歌单变化，则提交歌单到Vuex
+      if(this.musicListDetail.id != this.$store.state.musicListDetail){
+        this.$store.commit("updateMusicList",{
+          musicList:this.musicListDetail.tracks,
+          musicListId:this.musicListDetail.id
+        })
+      }
     },
     // 判断点击的是否是下载按钮  ---- Todo
-    clickCell(){
-
+    clickCell(row){
+      console.log(row)
     },
-    // 为什么要设置这个函数？功能是什么？
-    handleIndex(){
-
+    // 设置了 type=index，可以通过传递 index 属性来自定义table的索引
+    handleIndex(index){
+      // console.log(index)
+      index += 1
+      if(index < 10) return '0' + index
+      else return index
     }
   },
   watch:{
-    // 过滤器，控制列表展示的歌曲数量
-    filters:{
-      handleNum
-    }
+  },
+  // 过滤器，控制列表展示的歌曲数量
+  filters:{
+    showDate(value){
+      let date = new Date(value)
+      return formatDate(date)
+      // return formatDate(date,"yyyy-MM-dd")
+    },
+    handleNum,
   },
   mounted() {
     // 这里暂不考虑异步的问题
-    // this.getMusicListDetail()
+    this.getMusicListDetail()
     
-    // let test = "/api/playlist/detail?id=924680166&timestamp=1653552747000"
+    // let test = "/api/login/cellphone?phone=15675205437&password=zjl123456"
     // this.$axios.get(test).then(res =>{
     //   console.log(res)
     // })
@@ -345,6 +326,7 @@ export default {
   border: 1px solid #ddd;
   border-radius: 20px;
   transform: scale(0.9);
+  cursor: pointer;
 }
 
 .buttonItem i {
