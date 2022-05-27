@@ -57,7 +57,7 @@ const routes = [
         path:'/musiclistdetail',
         name: 'musicListDetail',
         component:MusicListDetail
-      }
+      },
     ]
   }
 ]
