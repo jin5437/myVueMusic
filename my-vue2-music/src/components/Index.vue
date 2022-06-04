@@ -1,10 +1,10 @@
 <template>
-  <el-container>
+  <el-container style="height: 100%;">
     <!-- 顶栏 -->
     <el-header>
       <header-bar></header-bar>
     </el-header>
-    <el-container>
+    <el-container style="height: cal(100%-50px);">
       <!-- 侧边栏 -->
       <el-aside width="160px">
         <el-menu
@@ -41,7 +41,7 @@
         </el-menu>
       </el-aside>
       <!-- 主体内容 -->
-      <el-main>
+      <el-main class="routerView">
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -71,6 +71,7 @@ export default {
 </script>
 
 <style scoped>
+
 .is-active {
   background-color: #f6f6f7;
   font-size: 16px;
@@ -83,15 +84,13 @@ export default {
 }
 
 .routerView {
-  padding: 0 15px;
-  margin: 0;
-  width: 100%;
-  height: calc(80vh - 105px);
+  margin-left: 160px;
+  height: 100%;
+  overflow: auto;
 }
 
 .el-header {
   background-color: #ec4141;
-  /* height: 50px !important; */
   padding: 0;
   margin: 0;
   z-index: 100;
@@ -100,6 +99,8 @@ export default {
 .el-aside {
   border-right: 1px solid #ccc;
   height: calc(90vh);
+  position: fixed;
+  z-index: 99;
 }
 
 .el-menu {

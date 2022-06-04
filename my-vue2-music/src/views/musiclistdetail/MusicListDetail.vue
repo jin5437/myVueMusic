@@ -107,8 +107,8 @@
             >
             </el-table-column>
             <el-table-column label="" width="23">
-              <!-- 下载按钮 -->
-              <i class="iconfont icon-download"></i>
+              <!--  Todo：  点击下载按钮，下载歌曲 -->
+              <i class="iconfont el-icon-download"></i>
             </el-table-column>
             <el-table-column prop="name" label="音乐标题" min-width="350">
             </el-table-column>
@@ -159,6 +159,11 @@ export default {
       })
       console.log(result)
       this.musicListDetail = result.data.playlist
+
+      // 处理歌曲时长，将毫秒数的时间转化为分钟：秒的格式
+      this.musicListDetail.tracks.forEach((item,index) => {
+        this.musicListDetail.tracks[index].dt = handleMusicTime(item.dt)
+      });
     },
 
     // 点击全部播放的按钮
@@ -373,7 +378,7 @@ export default {
 }
 
 .musicList {
-  margin: -15px 15px 0;
+  margin: -15px 15px 60px;
 }
 
 .page {
