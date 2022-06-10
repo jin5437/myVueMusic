@@ -131,9 +131,10 @@ export default {
   margin: auto;
 }
 .highqualityEntry {
+  box-sizing: border-box;
   position: relative;
   width: 100%;
-  margin: 10px;
+  padding: 10px;
   height: 200px;
   border-radius: 10px;
   overflow: hidden;

@@ -1,5 +1,8 @@
 <template>
-  <div></div>
+  <div class="singerContainer">
+    <p>这是歌手列表组件</p>
+    
+  </div>
 </template>
 
 <script>
@@ -8,6 +11,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.singerContainer{
+  height: 800px;
+  overflow-y: scroll;
+}
 </style>

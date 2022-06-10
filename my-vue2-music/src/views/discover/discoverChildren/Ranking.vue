@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <p>这是排行榜组件</p>
+  </div>
 </template>
 
 <script>

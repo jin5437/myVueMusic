@@ -1,5 +1,5 @@
 <template>
-  <el-container style="height: 100%;">
+  <el-container class="container">
     <!-- 顶栏 -->
     <el-header>
       <header-bar></header-bar>
@@ -72,6 +72,9 @@ export default {
 
 <style scoped>
 
+.container{
+  width: 100%;
+}
 .is-active {
   background-color: #f6f6f7;
   font-size: 16px;
@@ -84,22 +87,24 @@ export default {
 }
 
 .routerView {
-  margin-left: 160px;
+  margin-left: 20px;
   height: 100%;
   overflow: auto;
 }
 
 .el-header {
+  box-sizing: border-box;
+  /* position: fixed; */
   background-color: #ec4141;
-  padding: 0;
-  margin: 0;
-  z-index: 100;
+  width: 100%;
+  z-index: 1000;
 }
 
 .el-aside {
   border-right: 1px solid #ccc;
-  height: calc(90vh);
-  position: fixed;
+  height: calc(90vh - 30px);
+  /* position: fixed; */
+  padding-top: 20px;
   z-index: 99;
 }
 
@@ -124,6 +129,7 @@ export default {
 }
 
 .el-main {
+  margin-top: 20px;
   padding: 0;
 }
 </style>

@@ -1,5 +1,4 @@
 <template>
-  <div class="navBarContainer">
     <div class="navBar">
       <div 
         class="barItem"
@@ -11,7 +10,6 @@
         {{item.name}}
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -32,8 +30,21 @@ export default {
       }
     }
   },
+  created() {
+    // console.log(this.$route.path)
+    // 根据地址判断activNum的值，确定当前是哪个组件
+    this.navBarItem.forEach((item, index) => {
+      // console.log(item)
+      // decodeURI()函数对 encodeURI() 函数编码过的 URI 解码
+      if(decodeURI(this.$route.path).search(item.path) !== -1){
+        this.activeNum = index
+      }
+    });
+  },
   methods: {
     clickBarItem(path,index){
+      console.log(this.activeNum)
+      // console.log(path)
       if(this.activeNum == index){
         return
       }
@@ -48,13 +59,15 @@ export default {
 </script>
 
 <style scoped>
-.navBarContainer {
+/* .navBarContainer {
   height: 60px;
   width: 100%;
   position: relative;
-}
+} */
 
 .navBar {
+  height: 60px;
+  width: 100%;
   display: flex;
   position: relative;
   left: 0px;
@@ -64,6 +77,7 @@ export default {
   width: 100%;
   color: rgb(49, 49, 49);
   align-items: center;
+  box-sizing: border-box;
   padding: 10px 0 20px 20px;
 }
 

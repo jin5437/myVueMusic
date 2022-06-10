@@ -229,6 +229,8 @@ export default {
 
 <style scoped>
 .musicListDetail {
+  /* 设置滚动条，两者缺一不可 */
+  height: 800px;
   overflow-y: scroll;
 }
 

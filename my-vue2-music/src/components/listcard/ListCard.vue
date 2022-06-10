@@ -77,16 +77,14 @@ export default {
 .listCard {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-between; */
-  /* margin: 10px 0; */
+
 }
 
 .listCardItem {
   box-sizing: border-box;
   width: 20%;
   padding: 20px;
-  /* margin: 0 2% 20px 0; */
-  overflow: hidden;
+  overflow: auto;
   cursor: pointer;
 }
 

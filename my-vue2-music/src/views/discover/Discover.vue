@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <nav-bar @click="clickBarItem" :navBarItem="navBarData"></nav-bar>
-    <router-view></router-view>
+  <div class="discoverContainer">
+    <nav-bar @clickBarItem="clickBarItem" :navBarItem="navBarData"></nav-bar>
+    <router-view class="discover"></router-view>
   </div>
 </template>
 
@@ -15,22 +15,23 @@ export default {
       navBarData: [
         {
           name: "精品歌单",
-          path: "./discover/musiclist",
+          path: "/index/discover/musiclist",
         },
         {
           name: "歌手",
-          path: "./discover/singer",
+          path: "/index/discover/singer",
         }, 
         {
           name: "排行榜",
-          path: "./discover/rangking",
+          path: "/index/discover/rangking",
         }
       ],
     };
   },
   methods: {
-    // 接收子组件navbar传过来的点击事件，为什么要接收呢？
+    // 接收子组件navbar传过来的点击事件，实现跳转到对应的路由组件
     clickBarItem(path){
+      console.log(path)
       this.$router.push(path)
     }
   },
@@ -38,16 +39,16 @@ export default {
 </script>
 
 <style scoped>
-.discoverContainer {
+/* .discoverContainer {
   overflow: hidden;
   padding: 0 !important;
-}
+} */
 
 .discover {
-  /* max-width: 1000px; */
+  box-sizing: border-box;
   margin: auto;
-  overflow: scroll;
-  height: calc(80vh - 157px);
+  overflow-y: scroll;
+  height: calc(80vh);
   padding: 0 15px;
 }
 </style>
