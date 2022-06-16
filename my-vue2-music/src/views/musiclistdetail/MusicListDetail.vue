@@ -181,10 +181,10 @@ export default {
     // 双击table的某一行，播放歌曲
     clickRow(row){
       // row是当前行的数据
-      console.log(row)
-      // 将musicId提交到Vuex中，供bottomControl查询歌曲url和其他操作
+      // console.log(row)
+      // 将musicId提交到 Vuex中，供 bottomControl查询歌曲url和其他操作
       this.$store.commit("updateMusicId",row.id)
-      // 如果歌单变化，则提交歌单到Vuex
+      // 如果歌单变化，则提交歌单到 Vuex
       if(this.musicListDetail.id != this.$store.state.musicListDetail){
         this.$store.commit("updateMusicList",{
           musicList:this.musicListDetail.tracks,

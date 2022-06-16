@@ -22,20 +22,31 @@ export default new Vuex.Store({
       state.isMusicDetailCardShow = !state.isMusicDetailCardShow
     },
     // 切换播放状态
-    changeState(state){
-      state.isPlay = !state.isPlay
+    changePlayState(state,isPlay){
+      // console.log("changePlayState的isPlay",isPlay)
+      state.isPlay = isPlay
     },
+    // 更新音乐url
     updateMusicId(state,musicId){
       console.log("updateMusicId")
       state.musicId = musicId
     },
     // 更新歌单列表和歌单id
     updateMusicList(state,playload){
-      // 歌单id变化
+      /* 
+        playload:是从 musicListDetail 组件中，commit的值
+      */
+      // console.log('playload的值：',playload)
+      // 歌单id变化，重置当前播放音乐索引
       if(playload.musicListId != state.musicListId){
         state.musicListId = playload.musicListId
       }
-      
+      /* 
+        注意这里需要深拷贝，直接赋值操作是浅拷贝
+        vuex中的musicList是动态数据，展示的歌单是固定的数据
+      */
+      let musicList = playload.musicList.splice(0)
+      state.musicList = musicList
     },
   },
   // 异步方法

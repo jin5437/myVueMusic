@@ -9,9 +9,9 @@
     <audio
     :src="musicUrl"
     ref="audioPlayer"
-    autoplay
     
-    @ended="changeMusic('next')"
+    @play="changeState(true)"
+    @pause="changeState(false)"
     @timeupdate="timeupdate"
     ></audio>
     <div class="left">
@@ -50,14 +50,14 @@
         <span 
           ><i class="iconfont el-icon-arrow-left"></i
         ></span>
-        <!-- <span @click="musicList.length !=0 ? changePlayState() :''"> -->
-          <span @click="changePlayState()">
+        <span @click="musicList.length != 0 ? changePlayState() : ''">
+        <!-- <span @click="changeState()"> -->
           <i
             class="iconfont el-icon-video-play"
-            v-show="!$store.state.isPlay"
+            v-show="!this.$store.state.isPlay"
 
           ></i>
-          <i class="iconfont el-icon-video-pause" v-show="$store.state.isPlay"></i>
+          <i class="iconfont el-icon-video-pause" v-show="this.$store.state.isPlay"></i>
         </span>
         <span 
           ><i class="iconfont el-icon-arrow-right"></i
@@ -109,13 +109,24 @@ export default {
     }
   },
   methods: {
-    test(){
-      this.$refs['audioPlayer'].play()
+    // 播放音乐
+    playMusic(){
+      this.$refs.audioPlayer.play()
     },
-    // 切换播放状态
+    // 暂停音乐
+    pauseMusic(){
+      this.$refs.audioPlayer.pause()
+    },
+    // 切换播放状态: 播放或者暂停
+    // 先判断isPlay状态，再播放
     changePlayState(){
-      this.$store.commit('changeState')
-      this.test()
+      // console.log('前：isPlay的值是',this.$store.state.isPlay)
+      this.$store.state.isPlay ? this.pauseMusic() : this.playMusic()  
+      // console.log('后：isPlay的值是',this.$store.state.isPlay)
+    },
+    // 改变状态
+    changeState(state){
+      this.$store.commit("changePlayState",state)
     },
     timeupdate(){
 
@@ -123,11 +134,23 @@ export default {
     // 获取歌曲url
     async getMusicUrl(id){
       let result = await this.$request("/song/url",{id})
+      // 获取不到url
       if(result.data.data[0].url == null){
         this.$message.error('当前歌曲无版权，即将为您播放下一首')
+        // Todo--切歌changeMusic
+        return
       }
-      console.log(result)
+      // console.log('根据id，拿到对应的音乐musicUrl' , result)
+      // 获取到歌曲的url
       this.musicUrl = result.data.data[0].url
+      /* 
+        拿到musicUrl后，因为设置了自动播放，所以这里只需要获取歌曲url即可
+        否则，需要手动调用play()方法，实现播放
+      */
+     console.log('this.musicUrl的值',this.musicUrl )
+     this.$nextTick(() => {
+       this.playMusic()
+     })
     },
     
   },
@@ -153,6 +176,23 @@ export default {
     //   this.test()
     // })
   },
+  watch: {
+    // 监听vuex中的musicId的方法
+    "$store.state.musicId"(id){
+      //先暂停当前播放的音乐
+      this.pauseMusic()
+      // 监听当前歌单
+      this.musicList = this.$store.state.musicList
+      // console.log('当前歌单是：',this.musicList)
+      // 监听当前播放的音乐url
+      this.getMusicUrl(id)
+      
+    },
+    // 监听状态：播放 或者 暂停
+    "$store.state.isPlay"(isPlay){
+      isPlay ? this.playMusic() : this.pauseMusic()
+    }
+  }
 }
 </script>
 
