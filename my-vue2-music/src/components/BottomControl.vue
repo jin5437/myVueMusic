@@ -9,7 +9,7 @@
     <audio
     :src="musicUrl"
     ref="audioPlayer"
-    
+    autoplay
     @play="changeState(true)"
     @pause="changeState(false)"
     @timeupdate="timeupdate"
@@ -117,14 +117,11 @@ export default {
     pauseMusic(){
       this.$refs.audioPlayer.pause()
     },
-    // 切换播放状态: 播放或者暂停
-    // 先判断isPlay状态，再播放
+    // 切换播放: 播放或者暂停
     changePlayState(){
-      // console.log('前：isPlay的值是',this.$store.state.isPlay)
       this.$store.state.isPlay ? this.pauseMusic() : this.playMusic()  
-      // console.log('后：isPlay的值是',this.$store.state.isPlay)
     },
-    // 改变状态
+    // 改变状态，提交到vuex中
     changeState(state){
       this.$store.commit("changePlayState",state)
     },
@@ -147,10 +144,10 @@ export default {
         拿到musicUrl后，因为设置了自动播放，所以这里只需要获取歌曲url即可
         否则，需要手动调用play()方法，实现播放
       */
-     console.log('this.musicUrl的值',this.musicUrl )
-     this.$nextTick(() => {
-       this.playMusic()
-     })
+    //  console.log('this.musicUrl的值',this.musicUrl )
+    //  this.$nextTick(() => {
+    //    this.playMusic()
+    //  })
     },
     
   },

@@ -159,7 +159,7 @@ export default {
       })
       console.log(result)
       this.musicListDetail = result.data.playlist
-
+      // console.log("this.musicListDetail.tracks的值：", this.musicListDetail.tracks)
       // 处理歌曲时长，将毫秒数的时间转化为分钟：秒的格式
       this.musicListDetail.tracks.forEach((item,index) => {
         this.musicListDetail.tracks[index].dt = handleMusicTime(item.dt)
@@ -176,7 +176,7 @@ export default {
     },
     // 点击切换el-tab-pane
     clickTab(e){
-      console.log(e.index)
+      // console.log(e.index)
     },
     // 双击table的某一行，播放歌曲
     clickRow(row){
@@ -191,10 +191,11 @@ export default {
           musicListId:this.musicListDetail.id
         })
       }
+      // console.log('歌单详情',this.musicListDetail.tracks)
     },
     // 判断点击的是否是下载按钮  ---- Todo
     clickCell(row){
-      console.log(row)
+      // console.log(row)
     },
     // 设置了 type=index，可以通过传递 index 属性来自定义table的索引
     handleIndex(index){
@@ -391,7 +392,7 @@ export default {
 
 .placeholder {
   width: 100%;
-  height: 50px;
+  /* height: 20px; */
 }
 
 .loadMore {

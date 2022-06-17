@@ -1,5 +1,9 @@
 <template>
-  <div></div>
+  <div class="navBar">
+    <div class="barItem">
+      {{}}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -8,6 +12,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -78,7 +78,7 @@ export default {
       // console.log(this.theFirstOfHighquality)
     },
 
-    // todo---获取热门歌单的tag数据，拿tag用来做什么呢？
+    // todo---获取热门歌单的tag数据，
     async getHotTag(){
       let result = await this.$request("/playlist/hot")
       console.log(result)
@@ -98,7 +98,7 @@ export default {
     // 点击歌单，id是歌单id，进入歌单详细列表页面 MusicListDetail.vue
     clickListCardItem(id){
       this.$router.push({name: 'musicListDetail',params:{id}})
-      console.log("进入歌单详细列表页面 MusicListDetail.vue")
+      // console.log("进入歌单详细列表页面 MusicListDetail.vue")
     },
     // 页面发生变化
     pageChange(){

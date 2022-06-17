@@ -9,7 +9,7 @@ export function request(url,params){
   // 1.创建axios实例
   const instance = axios.create({
     baseURL:'/api',
-    timeout:3000, //请求超过30秒则判定为超时
+    timeout:5000, //请求超过50秒则判定为超时
     withCredentials:true  //在CORS请求中，如果想要传递Cookie,设为true
   })
   // 2.发送axios请求

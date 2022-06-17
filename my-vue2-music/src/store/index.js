@@ -28,7 +28,7 @@ export default new Vuex.Store({
     },
     // 更新音乐url
     updateMusicId(state,musicId){
-      console.log("updateMusicId")
+      // console.log("updateMusicId")
       state.musicId = musicId
     },
     // 更新歌单列表和歌单id
@@ -42,10 +42,11 @@ export default new Vuex.Store({
         state.musicListId = playload.musicListId
       }
       /* 
-        注意这里需要深拷贝，直接赋值操作是浅拷贝
+        注意这里需要深拷贝，使用数组的slice方法，是裁剪，相当于深拷贝，不影响原数组
+        直接赋值操作是浅拷贝
         vuex中的musicList是动态数据，展示的歌单是固定的数据
       */
-      let musicList = playload.musicList.splice(0)
+      let musicList = playload.musicList.slice(0)
       state.musicList = musicList
     },
   },
